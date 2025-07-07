@@ -1,8 +1,10 @@
 import React from 'react';
 import { Mail, MessageCircle, Instagram } from 'lucide-react';
+import { useTheme } from '../contexts/ThemeContext';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const { isDark } = useTheme();
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -18,9 +20,9 @@ const Footer = () => {
           {/* Brand */}
           <div className="lg:col-span-2">
             <img 
-              src="/Work with Bola Logo.svg" 
+              src={isDark ? "/Work with Bola Logo white.svg" : "/Work with Bola Logo.svg"}
               alt="Work with Bola" 
-              className="w-[120px] h-[100px]"
+              className="h-16 w-auto mb-6 transition-all duration-300"
             />
             <p className="text-gray-600 dark:text-gray-400 mb-8 leading-relaxed max-w-md">
               Your shortcut to looking the best at what you love to do.

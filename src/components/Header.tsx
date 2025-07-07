@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import ThemeToggle from './ThemeToggle';
+import { useTheme } from '../contexts/ThemeContext';
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const { isDark } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -35,14 +37,13 @@ const Header = () => {
         : 'bg-transparent'
     }`}>
       <div className="max-w-6xl mx-auto px-6 lg:px-8">
-        <div className="flex justify-between items-center py-0">
+        <div className="flex justify-between items-center py-4">
           {/* Logo */}
           <div className="flex items-center">
             <img 
-              src="/Work with Bola Logo.svg" 
+              src={isDark ? "/Work with Bola Logo white.svg" : "/Work with Bola Logo.svg"}
               alt="Work with Bola" 
-              className="h-8 w-auto"
-              style={{ width: '200px', height: '100px' }}
+              className="h-12 w-auto transition-all duration-300"
             />
           </div>
           
