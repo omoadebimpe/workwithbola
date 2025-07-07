@@ -4,18 +4,18 @@ const HowItWorks = () => {
   const steps = [
     {
       number: '01',
-      title: 'Quick Discovery',
-      description: 'We talk about your business, goals, and what you need to look professional.'
+      title: 'We chat to understand your business',
+      description: 'Quick conversation about what you do and what\'s holding you back from looking professional.'
     },
     {
       number: '02',
-      title: 'Packaging and Fixes',
-      description: 'I create or improve your materials to make sure everything looks cohesive and credible.'
+      title: 'I build your website, tools, or business materials',
+      description: 'Create everything you need to package your business properly and look credible.'
     },
     {
       number: '03',
-      title: 'You look ready for business',
-      description: 'You get professional materials that help you win opportunities and grow.'
+      title: 'You walk away looking professional',
+      description: 'Ready to be taken seriously by clients, partners, and investors.'
     }
   ];
 
@@ -25,15 +25,15 @@ const HowItWorks = () => {
         {/* Header */}
         <div className="max-w-3xl mb-16">
           <h2 className="text-4xl lg:text-5xl font-bold text-black mb-6">
-            How it works
+            How It Works
           </h2>
           <p className="text-xl text-gray-600 leading-relaxed">
-            Simple process, clear results.
+            Quick, simple process to fix your business presentation:
           </p>
         </div>
 
         {/* Steps */}
-        <div className="space-y-16">
+        <div className="space-y-16 mb-16">
           {steps.map((step, index) => (
             <div
               key={index}
@@ -54,6 +54,13 @@ const HowItWorks = () => {
               </div>
             </div>
           ))}
+        </div>
+
+        {/* Bottom Note */}
+        <div className="text-center bg-gradient-to-r from-blue-50 to-emerald-50 rounded-3xl p-8 lg:p-12">
+          <p className="text-2xl font-bold text-black">
+            Need help again down the line? You know where to find me.
+          </p>
         </div>
       </div>
     </section>

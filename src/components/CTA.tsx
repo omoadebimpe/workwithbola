@@ -6,11 +6,11 @@ const CTA = () => {
       <div className="max-w-6xl mx-auto px-6 lg:px-8">
         <div className="bg-black rounded-3xl p-12 lg:p-16 text-center">
           <h2 className="text-4xl lg:text-6xl font-bold text-white mb-8 leading-tight">
-            Ready to fix your business presentation?
+            Ready to Get Trusted Faster?
           </h2>
           
           <p className="text-xl text-gray-300 mb-12 max-w-3xl mx-auto leading-relaxed">
-            Let's have a quick chat about what you need and how I can help you look as professional as you are.
+            Stop holding your business back with poor presentation. Let's fix how you show up.
           </p>
 
           <a
