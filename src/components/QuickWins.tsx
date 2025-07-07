@@ -15,7 +15,7 @@ const QuickWins = () => {
   ];
 
   return (
-    <section className="py-16 lg:py-24 bg-gradient-to-br from-blue-50 via-white to-emerald-50">
+    <section className="py-16 lg:py-24">
       <div className="max-w-6xl mx-auto px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-12">
@@ -29,7 +29,7 @@ const QuickWins = () => {
           {wins.map((win, index) => (
             <div
               key={index}
-              className="group flex items-center space-x-4 p-6 bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 border border-gray-100 hover:border-blue-200"
+              className="group flex items-center space-x-4 p-6 bg-white rounded-xl shadow-sm hover:shadow-md transition-all duration-300 border border-gray-100 hover:border-gray-200"
             >
               <CheckCircle className="w-6 h-6 text-emerald-500 flex-shrink-0 group-hover:scale-110 transition-transform duration-300" />
               <p className="text-lg font-medium text-gray-800">{win}</p>
@@ -37,15 +37,15 @@ const QuickWins = () => {
           ))}
         </div>
 
-        {/* Guarantees */}
+        {/* Guarantees - Minimal Design */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {guarantees.map((guarantee, index) => (
             <div
               key={index}
-              className="group flex items-center justify-center space-x-3 p-6 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
+              className="group flex items-center justify-center space-x-3 p-6 bg-gray-50 text-gray-700 rounded-xl border border-gray-200 hover:bg-gray-100 transition-all duration-300"
             >
-              <guarantee.icon className="w-6 h-6 group-hover:scale-110 transition-transform duration-300" />
-              <span className="font-semibold">{guarantee.text}</span>
+              <guarantee.icon className="w-5 h-5 text-gray-600 group-hover:scale-110 transition-transform duration-300" />
+              <span className="font-medium">{guarantee.text}</span>
             </div>
           ))}
         </div>

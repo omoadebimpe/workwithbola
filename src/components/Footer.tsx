@@ -81,7 +81,7 @@ const Footer = () => {
                 WhatsApp
               </a>
               <a
-                href="https://www.instagram.com/thestudiozero_/"
+                href="https://www.instagram.com/workwithbola/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center text-gray-600 hover:text-blue-600 transition-colors duration-200 group"

@@ -20,7 +20,7 @@ const HowItWorks = () => {
   ];
 
   return (
-    <section id="how-it-works" className="py-16 lg:py-24">
+    <section id="how-it-works" className="py-16 lg:py-24 bg-gray-50">
       <div className="max-w-6xl mx-auto px-6 lg:px-8">
         {/* Header */}
         <div className="mb-16">
@@ -29,18 +29,18 @@ const HowItWorks = () => {
           </h2>
         </div>
 
-        {/* Steps */}
+        {/* Steps - Minimal Design */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {steps.map((step, index) => (
             <div
               key={index}
               className="group bg-white p-8 rounded-2xl text-center hover:shadow-lg transition-all duration-500 border border-gray-100 relative overflow-hidden"
             >
-              {/* Background gradient on hover */}
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-emerald-50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              {/* Subtle background on hover */}
+              <div className="absolute inset-0 bg-gray-50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               
               <div className="relative z-10">
-                <div className="w-16 h-16 bg-gradient-to-r from-blue-600 to-blue-700 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg">
+                <div className="w-16 h-16 bg-gray-900 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-md">
                   {step.number}
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-4">
