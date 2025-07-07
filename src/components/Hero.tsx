@@ -24,7 +24,7 @@ const Hero = () => {
           </p>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-4 mb-16">
+          <div className="flex flex-col sm:flex-row gap-4">
             <a
               href="https://calendly.com/bolaolaniyanadedayo"
               target="_blank"
@@ -37,22 +37,8 @@ const Hero = () => {
               onClick={scrollToServices}
               className="border-2 border-black text-black px-8 py-4 rounded-lg font-semibold text-lg hover:bg-black hover:text-white transition-all duration-200 text-center"
             >
-              See how I can help
+              See How I Can Help
             </button>
-          </div>
-
-          {/* Trust Indicators */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-8 border-t border-gray-200">
-            {[
-              { number: '50+', label: 'Businesses helped' },
-              { number: '3x', label: 'Average growth' },
-              { number: '48hrs', label: 'Response time' }
-            ].map((stat, index) => (
-              <div key={index} className="text-center md:text-left">
-                <div className="text-3xl font-bold text-black mb-2">{stat.number}</div>
-                <div className="text-gray-600">{stat.label}</div>
-              </div>
-            ))}
           </div>
         </div>
       </div>

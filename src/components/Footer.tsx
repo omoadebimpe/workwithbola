@@ -4,6 +4,13 @@ import { Mail, MessageCircle, Instagram } from 'lucide-react';
 const Footer = () => {
   const currentYear = new Date().getFullYear();
 
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <footer className="bg-white border-t border-gray-200">
       <div className="max-w-6xl mx-auto px-6 lg:px-8 py-16">
@@ -33,13 +40,13 @@ const Footer = () => {
                 Book a Call
               </a>
               <button
-                onClick={() => document.getElementById('services')?.scrollIntoView({ behavior: 'smooth' })}
+                onClick={() => scrollToSection('services')}
                 className="block text-gray-600 hover:text-black transition-colors duration-200 text-left"
               >
                 Services
               </button>
               <button
-                onClick={() => document.getElementById('testimonials')?.scrollIntoView({ behavior: 'smooth' })}
+                onClick={() => scrollToSection('testimonials')}
                 className="block text-gray-600 hover:text-black transition-colors duration-200 text-left"
               >
                 Testimonials

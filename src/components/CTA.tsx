@@ -6,11 +6,11 @@ const CTA = () => {
       <div className="max-w-6xl mx-auto px-6 lg:px-8">
         <div className="bg-black rounded-3xl p-12 lg:p-16 text-center">
           <h2 className="text-4xl lg:text-6xl font-bold text-white mb-8 leading-tight">
-            Ready to Get Trusted Faster?
+            Ready to Look the Part?
           </h2>
           
           <p className="text-xl text-gray-300 mb-12 max-w-3xl mx-auto leading-relaxed">
-            Stop holding your business back with poor presentation. Let's fix how you show up.
+            Stop losing opportunities because your business looks unready. Let's fix how you show up.
           </p>
 
           <a
@@ -19,11 +19,11 @@ const CTA = () => {
             rel="noopener noreferrer"
             className="inline-block bg-white text-black px-12 py-4 rounded-lg font-semibold text-xl hover:bg-gray-100 transition-colors duration-200"
           >
-            Talk With Bola
+            Talk With Bola — Free 15-min Chat
           </a>
 
           <div className="mt-8 text-gray-400">
-            Free 15-minute consultation • No obligations • Quick response
+            Free consultation • No obligations • Quick response
           </div>
         </div>
       </div>
