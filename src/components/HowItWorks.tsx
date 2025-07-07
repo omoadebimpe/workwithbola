@@ -20,11 +20,14 @@ const HowItWorks = () => {
   ];
 
   return (
-    <section id="how-it-works" className="py-16 lg:py-24 bg-gray-50">
-      <div className="max-w-6xl mx-auto px-6 lg:px-8">
+    <section id="how-it-works" className="py-16 lg:py-24 bg-gray-50 dark:bg-gray-900/50 relative">
+      {/* Dark mode gradient */}
+      <div className="absolute inset-0 bg-gradient-to-r from-emerald-900/0 via-blue-900/0 to-purple-900/0 dark:from-emerald-900/5 dark:via-blue-900/10 dark:to-purple-900/5 transition-all duration-1000"></div>
+      
+      <div className="max-w-6xl mx-auto px-6 lg:px-8 relative z-10">
         {/* Header */}
         <div className="mb-16">
-          <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+          <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-6">
             How It Works
           </h2>
         </div>
@@ -34,19 +37,19 @@ const HowItWorks = () => {
           {steps.map((step, index) => (
             <div
               key={index}
-              className="group bg-white p-8 rounded-2xl text-center hover:shadow-lg transition-all duration-500 border border-gray-100 relative overflow-hidden"
+              className="group bg-white dark:bg-gray-800/50 p-8 rounded-2xl text-center hover:shadow-lg transition-all duration-500 border border-gray-100 dark:border-gray-700 relative overflow-hidden backdrop-blur-sm"
             >
               {/* Subtle background on hover */}
-              <div className="absolute inset-0 bg-gray-50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              <div className="absolute inset-0 bg-gray-50 dark:bg-gray-700/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               
               <div className="relative z-10">
-                <div className="w-16 h-16 bg-gray-900 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-md">
+                <div className="w-16 h-16 bg-gray-900 dark:bg-gray-100 text-white dark:text-gray-900 rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-md">
                   {step.number}
                 </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
                   {step.title}
                 </h3>
-                <p className="text-lg text-gray-600 leading-relaxed">
+                <p className="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
                   {step.description}
                 </p>
               </div>
