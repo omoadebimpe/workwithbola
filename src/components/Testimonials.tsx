@@ -16,11 +16,11 @@ const Testimonials = () => {
   ];
 
   return (
-    <section id="testimonials" className="py-16 lg:py-24 bg-gray-50">
+    <section id="testimonials" className="py-16 lg:py-24">
       <div className="max-w-6xl mx-auto px-6 lg:px-8">
         {/* Header */}
         <div className="mb-16">
-          <h2 className="text-4xl lg:text-5xl font-bold text-black mb-6">
+          <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
             What Clients Say
           </h2>
         </div>
@@ -30,18 +30,23 @@ const Testimonials = () => {
           {testimonials.map((testimonial, index) => (
             <div
               key={index}
-              className="bg-white p-8 rounded-2xl shadow-sm hover:shadow-lg transition-shadow duration-300"
+              className="group bg-white p-8 rounded-2xl shadow-sm hover:shadow-lg transition-all duration-500 border border-gray-100 relative overflow-hidden"
             >
-              <Quote className="w-8 h-8 text-gray-400 mb-6" />
-              <p className="text-gray-700 mb-8 leading-relaxed text-lg">
-                "{testimonial.quote}"
-              </p>
-              <div>
-                <div className="font-semibold text-black">
-                  {testimonial.author}
-                </div>
-                <div className="text-gray-600">
-                  {testimonial.company}
+              {/* Background gradient on hover */}
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-emerald-50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              
+              <div className="relative z-10">
+                <Quote className="w-8 h-8 text-blue-600 mb-6 group-hover:scale-110 transition-transform duration-300" />
+                <p className="text-gray-700 mb-8 leading-relaxed text-lg">
+                  "{testimonial.quote}"
+                </p>
+                <div>
+                  <div className="font-semibold text-gray-900">
+                    {testimonial.author}
+                  </div>
+                  <div className="text-gray-600">
+                    {testimonial.company}
+                  </div>
                 </div>
               </div>
             </div>

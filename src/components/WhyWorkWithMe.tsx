@@ -21,14 +21,14 @@ const WhyWorkWithMe = () => {
   ];
 
   return (
-    <section className="py-16 lg:py-24">
+    <section className="py-16 lg:py-24 bg-gray-50">
       <div className="max-w-6xl mx-auto px-6 lg:px-8">
         {/* Header */}
         <div className="mb-16">
-          <h2 className="text-4xl lg:text-5xl font-bold text-black mb-6">
+          <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
             Why Work With Me
           </h2>
-          <p className="text-xl text-gray-700 leading-relaxed font-medium">
+          <p className="text-xl text-gray-600 leading-relaxed font-medium">
             No agency fluff. No guesswork. Just clear, fast results.
           </p>
         </div>
@@ -38,15 +38,20 @@ const WhyWorkWithMe = () => {
           {benefits.map((benefit, index) => (
             <div
               key={index}
-              className="bg-white p-8 rounded-2xl text-center border border-gray-100 hover:shadow-lg transition-shadow duration-300"
+              className="group bg-white p-8 rounded-2xl text-center border border-gray-100 hover:shadow-lg transition-all duration-500 relative overflow-hidden"
             >
-              <benefit.icon className="w-12 h-12 text-black mx-auto mb-6" />
-              <h3 className="text-xl font-semibold text-black mb-4">
-                {benefit.title}
-              </h3>
-              <p className="text-gray-600 leading-relaxed">
-                {benefit.description}
-              </p>
+              {/* Background gradient on hover */}
+              <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-emerald-50 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              
+              <div className="relative z-10">
+                <benefit.icon className="w-12 h-12 text-blue-600 mx-auto mb-6 group-hover:scale-110 transition-transform duration-300" />
+                <h3 className="text-xl font-semibold text-gray-900 mb-4">
+                  {benefit.title}
+                </h3>
+                <p className="text-gray-600 leading-relaxed">
+                  {benefit.description}
+                </p>
+              </div>
             </div>
           ))}
         </div>

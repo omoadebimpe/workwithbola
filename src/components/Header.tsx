@@ -21,6 +21,12 @@ const Header = () => {
     }
   };
 
+  const navigationItems = [
+    { name: 'Portfolio', id: 'portfolio' },
+    { name: 'How It Works', id: 'how-it-works' },
+    { name: 'Testimonials', id: 'testimonials' }
+  ];
+
   return (
     <header className={`fixed top-0 w-full z-50 transition-all duration-300 ${
       isScrolled ? 'bg-white/95 backdrop-blur-md shadow-sm border-b border-gray-100' : 'bg-transparent'
@@ -39,28 +45,30 @@ const Header = () => {
           
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
-            {['Services', 'How It Works', 'Testimonials'].map((item) => (
+            {navigationItems.map((item) => (
               <button
-                key={item}
-                onClick={() => scrollToSection(item.toLowerCase().replace(' ', '-'))}
-                className="text-gray-700 hover:text-black transition-colors duration-200 font-medium"
+                key={item.name}
+                onClick={() => scrollToSection(item.id)}
+                className="text-gray-700 hover:text-blue-600 transition-colors duration-200 font-medium relative group"
               >
-                {item}
+                {item.name}
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 transition-all duration-300 group-hover:w-full"></span>
               </button>
             ))}
             <a
               href="https://calendly.com/bolaolaniyanadedayo"
               target="_blank"
               rel="noopener noreferrer"
-              className="bg-black text-white px-6 py-2.5 rounded-lg font-medium hover:bg-gray-800 transition-colors duration-200"
+              className="group bg-blue-600 text-white px-6 py-2.5 rounded-lg font-medium hover:bg-blue-700 transition-all duration-200 shadow-md hover:shadow-lg transform hover:-translate-y-0.5"
             >
-              Book Free Chat
+              <span className="group-hover:mr-1 transition-all duration-200">Book Free Chat</span>
+              <span className="inline-block group-hover:translate-x-0.5 transition-transform duration-200">→</span>
             </a>
           </nav>
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden p-2"
+            className="md:hidden p-2 text-gray-700 hover:text-blue-600 transition-colors duration-200"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
             {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -69,15 +77,15 @@ const Header = () => {
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden bg-white border-t border-gray-100">
+          <div className="md:hidden bg-white border-t border-gray-100 animate-slide-down">
             <nav className="py-4 space-y-2">
-              {['Services', 'How It Works', 'Testimonials'].map((item) => (
+              {navigationItems.map((item) => (
                 <button
-                  key={item}
-                  onClick={() => scrollToSection(item.toLowerCase().replace(' ', '-'))}
-                  className="block w-full text-left px-4 py-3 text-gray-700 hover:text-black hover:bg-gray-50 transition-colors duration-200"
+                  key={item.name}
+                  onClick={() => scrollToSection(item.id)}
+                  className="block w-full text-left px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-gray-50 transition-colors duration-200"
                 >
-                  {item}
+                  {item.name}
                 </button>
               ))}
               <div className="px-4 pt-2">
@@ -85,7 +93,7 @@ const Header = () => {
                   href="https://calendly.com/bolaolaniyanadedayo"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="block w-full bg-black text-white px-6 py-3 rounded-lg font-medium text-center hover:bg-gray-800 transition-colors duration-200"
+                  className="block w-full bg-blue-600 text-white px-6 py-3 rounded-lg font-medium text-center hover:bg-blue-700 transition-colors duration-200"
                 >
                   Book Free Chat
                 </a>

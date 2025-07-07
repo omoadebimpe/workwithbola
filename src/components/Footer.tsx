@@ -29,25 +29,31 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div>
-            <h4 className="font-semibold text-black mb-6">Quick Links</h4>
+            <h4 className="font-semibold text-gray-900 mb-6">Quick Links</h4>
             <div className="space-y-4">
               <a
                 href="https://calendly.com/bolaolaniyanadedayo"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="block text-gray-600 hover:text-black transition-colors duration-200"
+                className="block text-gray-600 hover:text-blue-600 transition-colors duration-200"
               >
                 Book a Call
               </a>
               <button
-                onClick={() => scrollToSection('services')}
-                className="block text-gray-600 hover:text-black transition-colors duration-200 text-left"
+                onClick={() => scrollToSection('portfolio')}
+                className="block text-gray-600 hover:text-blue-600 transition-colors duration-200 text-left"
               >
-                Services
+                Portfolio
+              </button>
+              <button
+                onClick={() => scrollToSection('how-it-works')}
+                className="block text-gray-600 hover:text-blue-600 transition-colors duration-200 text-left"
+              >
+                How It Works
               </button>
               <button
                 onClick={() => scrollToSection('testimonials')}
-                className="block text-gray-600 hover:text-black transition-colors duration-200 text-left"
+                className="block text-gray-600 hover:text-blue-600 transition-colors duration-200 text-left"
               >
                 Testimonials
               </button>
@@ -56,31 +62,31 @@ const Footer = () => {
 
           {/* Contact */}
           <div>
-            <h4 className="font-semibold text-black mb-6">Get in Touch</h4>
+            <h4 className="font-semibold text-gray-900 mb-6">Get in Touch</h4>
             <div className="space-y-4">
               <a
                 href="mailto:bolaolaniyanadedayo@gmail.com"
-                className="flex items-center text-gray-600 hover:text-black transition-colors duration-200"
+                className="flex items-center text-gray-600 hover:text-blue-600 transition-colors duration-200 group"
               >
-                <Mail className="w-4 h-4 mr-3" />
+                <Mail className="w-4 h-4 mr-3 group-hover:scale-110 transition-transform duration-200" />
                 Email
               </a>
               <a
                 href="https://wa.me/+2349071953226"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center text-gray-600 hover:text-black transition-colors duration-200"
+                className="flex items-center text-gray-600 hover:text-blue-600 transition-colors duration-200 group"
               >
-                <MessageCircle className="w-4 h-4 mr-3" />
+                <MessageCircle className="w-4 h-4 mr-3 group-hover:scale-110 transition-transform duration-200" />
                 WhatsApp
               </a>
               <a
                 href="https://www.instagram.com/thestudiozero_/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center text-gray-600 hover:text-black transition-colors duration-200"
+                className="flex items-center text-gray-600 hover:text-blue-600 transition-colors duration-200 group"
               >
-                <Instagram className="w-4 h-4 mr-3" />
+                <Instagram className="w-4 h-4 mr-3 group-hover:scale-110 transition-transform duration-200" />
                 Instagram
               </a>
             </div>
@@ -93,10 +99,10 @@ const Footer = () => {
             © {currentYear} Work with Bola. All rights reserved.
           </p>
           <div className="flex space-x-6 mt-4 md:mt-0">
-            <a href="#" className="text-gray-500 hover:text-black transition-colors text-sm">
+            <a href="#" className="text-gray-500 hover:text-blue-600 transition-colors text-sm">
               Privacy Policy
             </a>
-            <a href="#" className="text-gray-500 hover:text-black transition-colors text-sm">
+            <a href="#" className="text-gray-500 hover:text-blue-600 transition-colors text-sm">
               Terms of Service
             </a>
           </div>
