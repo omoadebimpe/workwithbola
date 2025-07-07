@@ -41,9 +41,9 @@ const Header = () => {
           {/* Logo */}
           <div className="flex items-center">
             <img 
-              src={isDark ? "/Work with Bola Logo white.svg" : "/Work with Bola Logo.svg"}
+              src={isDark ? "/Work with Bola Logo white copy.svg" : "/Work with Bola Logo.svg"}
               alt="Work with Bola" 
-              className="h-12 w-auto transition-all duration-300"
+              className="h-16 w-auto transition-all duration-300"
             />
           </div>
           

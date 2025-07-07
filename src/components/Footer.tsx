@@ -20,9 +20,9 @@ const Footer = () => {
           {/* Brand */}
           <div className="lg:col-span-2">
             <img 
-              src={isDark ? "/Work with Bola Logo white.svg" : "/Work with Bola Logo.svg"}
+              src={isDark ? "/Work with Bola Logo white copy.svg" : "/Work with Bola Logo.svg"}
               alt="Work with Bola" 
-              className="h-16 w-auto mb-6 transition-all duration-300"
+              className="h-20 w-auto mb-6 transition-all duration-300"
             />
             <p className="text-gray-600 dark:text-gray-400 mb-8 leading-relaxed max-w-md">
               Your shortcut to looking the best at what you love to do.
