@@ -48,6 +48,12 @@ const Footer = () => {
                 Portfolio
               </button>
               <button
+                onClick={() => scrollToSection('blog')}
+                className="block text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200 text-left"
+              >
+                Blog
+              </button>
+              <button
                 onClick={() => scrollToSection('how-it-works')}
                 className="block text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200 text-left"
               >

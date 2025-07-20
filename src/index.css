@@ -57,6 +57,25 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Blog content styling */
+.blog-content {
+  @apply prose prose-lg dark:prose-invert max-w-none;
+}
+
+.blog-content h1,
+.blog-content h2,
+.blog-content h3 {
+  @apply text-gray-900 dark:text-white;
+}
+
+.blog-content p {
+  @apply text-gray-600 dark:text-gray-300 leading-relaxed;
+}
+
+.blog-content a {
+  @apply text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300;
+}
+
 /* Custom focus styles */
 button:focus,
 a:focus {
