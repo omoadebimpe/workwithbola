@@ -25,6 +25,7 @@ const Header = () => {
   };
 
   const navigationItems = [
+    { name: 'Blog', id: 'blog', isLink: true, href: '/blog' },
     { name: 'Portfolio', id: 'portfolio' },
     { name: 'How It Works', id: 'how-it-works' },
     { name: 'Testimonials', id: 'testimonials' }
@@ -50,14 +51,25 @@ const Header = () => {
           {/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
             {navigationItems.map((item) => (
-              <button
-                key={item.name}
-                onClick={() => scrollToSection(item.id)}
-                className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200 font-medium relative group"
-              >
-                {item.name}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 dark:bg-blue-400 transition-all duration-300 group-hover:w-full"></span>
-              </button>
+              item.isLink ? (
+                <a
+                  key={item.name}
+                  href={item.href}
+                  className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200 font-medium relative group"
+                >
+                  {item.name}
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 dark:bg-blue-400 transition-all duration-300 group-hover:w-full"></span>
+                </a>
+              ) : (
+                <button
+                  key={item.name}
+                  onClick={() => scrollToSection(item.id)}
+                  className="text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200 font-medium relative group"
+                >
+                  {item.name}
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-blue-600 dark:bg-blue-400 transition-all duration-300 group-hover:w-full"></span>
+                </button>
+              )
             ))}
             <ThemeToggle />
             <a
@@ -88,13 +100,23 @@ const Header = () => {
           <div className="md:hidden bg-white dark:bg-gray-900 border-t border-gray-100 dark:border-gray-800 animate-slide-down">
             <nav className="py-4 space-y-2">
               {navigationItems.map((item) => (
-                <button
-                  key={item.name}
-                  onClick={() => scrollToSection(item.id)}
-                  className="block w-full text-left px-4 py-3 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors duration-200"
-                >
-                  {item.name}
-                </button>
+                item.isLink ? (
+                  <a
+                    key={item.name}
+                    href={item.href}
+                    className="block w-full text-left px-4 py-3 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors duration-200"
+                  >
+                    {item.name}
+                  </a>
+                ) : (
+                  <button
+                    key={item.name}
+                    onClick={() => scrollToSection(item.id)}
+                    className="block w-full text-left px-4 py-3 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors duration-200"
+                  >
+                    {item.name}
+                  </button>
+                )
               ))}
               <div className="px-4 pt-2">
                 <a

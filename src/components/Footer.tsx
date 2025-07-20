@@ -41,6 +41,12 @@ const Footer = () => {
               >
                 Book a Call
               </a>
+              <a
+                href="/blog"
+                className="block text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200"
+              >
+                Blog
+              </a>
               <button
                 onClick={() => scrollToSection('portfolio')}
                 className="block text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors duration-200 text-left"

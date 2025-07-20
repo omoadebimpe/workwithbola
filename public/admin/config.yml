@@ -1,0 +1,61 @@
+backend:
+  name: git-gateway
+  branch: main # Branch to update (optional; defaults to master)
+
+# Uncomment below to enable drafts
+# publish_mode: editorial_workflow
+
+media_folder: "public/images/uploads" # Media files will be stored in the repo under public/images/uploads
+public_folder: "/images/uploads" # The src attribute for uploaded media will begin with /images/uploads
+
+collections:
+  - name: "blog" # Used in routes, e.g., /admin/collections/blog
+    label: "Blog" # Used in the UI
+    folder: "public/blog" # The path to the folder where the documents are stored
+    create: true # Allow users to create new documents in this collection
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}" # Filename template, e.g., YYYY-MM-DD-title.md
+    fields: # The fields for each document, usually in front matter
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Publish Date", name: "date", widget: "datetime"}
+      - {label: "Featured Image", name: "image", widget: "image", required: false}
+      - {label: "Excerpt", name: "excerpt", widget: "text"}
+      - {label: "Category", name: "category", widget: "select", options: ["Web Design", "Branding", "Digital Tools", "Business Tips"]}
+      - {label: "Tags", name: "tags", widget: "list", default: []}
+      - {label: "Author", name: "author", widget: "string", default: "Bola Olaniyan"}
+      - {label: "Read Time", name: "readTime", widget: "string", default: "5 min read"}
+      - {label: "SEO Description", name: "description", widget: "text", required: false}
+      - {label: "Body", name: "body", widget: "markdown"}
+
+  - name: "pages"
+    label: "Pages"
+    files:
+      - label: "About Page"
+        name: "about"
+        file: "content/pages/about.md"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Body", name: "body", widget: "markdown"}
+      - label: "Services Page"
+        name: "services"
+        file: "content/pages/services.md"
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Body", name: "body", widget: "markdown"}
+
+  - name: "settings"
+    label: "Settings"
+    files:
+      - label: "Site Settings"
+        name: "site"
+        file: "content/settings/site.yml"
+        fields:
+          - {label: "Site Title", name: "title", widget: "string"}
+          - {label: "Site Description", name: "description", widget: "text"}
+          - {label: "Site URL", name: "url", widget: "string"}
+          - {label: "Contact Email", name: "email", widget: "string"}
+          - {label: "Phone Number", name: "phone", widget: "string"}
+          - {label: "Social Media", name: "social", widget: "object", fields: [
+              {label: "Instagram", name: "instagram", widget: "string", required: false},
+              {label: "LinkedIn", name: "linkedin", widget: "string", required: false},
+              {label: "Twitter", name: "twitter", widget: "string", required: false}
+            ]}
