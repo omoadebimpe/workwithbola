@@ -4,7 +4,6 @@ import Header from './components/Header';
 import Hero from './components/Hero';
 import QuickWins from './components/QuickWins';
 import Portfolio from './components/Portfolio';
-import Blog from './components/Blog';
 import HowItWorks from './components/HowItWorks';
 import WhyWorkWithMe from './components/WhyWorkWithMe';
 import Testimonials from './components/Testimonials';
@@ -22,7 +21,6 @@ function App() {
           <Hero />
           <QuickWins />
           <Portfolio />
-          <Blog />
           <HowItWorks />
           <WhyWorkWithMe />
           <Testimonials />
