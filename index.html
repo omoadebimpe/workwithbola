@@ -44,5 +44,16 @@
     <script
       src='https://cdn.jotfor.ms/agent/embedjs/0197987f4a407f2f80f16e270e357cd6a536/embed.js?skipWelcome=1&maximizable=1'>
     </script>
+    <script>
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.on("init", user => {
+        if (!user) {
+          window.netlifyIdentity.on("login", () => {
+            document.location.href = "/admin/";
+          });
+        }
+      });
+    }
+  </script>
   </body>
 </html>
