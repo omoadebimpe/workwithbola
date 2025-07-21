@@ -1,6 +1,7 @@
 ---
 title: Why Nobody Trusts Your Business Website (and How to Fix It Today)
 date: 2025-07-21T20:45:57.282Z
+image: /images/uploads/teamwork.webp
 excerpt: Your website is up. Your friends say it’s nice. But no one’s buying.
   The truth? People don’t trust it yet. Let’s fix that without stressing
   yourself out.
