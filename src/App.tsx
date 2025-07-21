@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { ThemeProvider } from './contexts/ThemeContext';
 import Header from './components/Header';
 import Hero from './components/Hero';
@@ -13,6 +13,19 @@ import ThreeBackground from './components/ThreeBackground';
 import BlogRouter from './components/BlogRouter';
 
 function App() {
+  // Handle Netlify Identity for invite/reset password links
+  useEffect(() => {
+    if (window.netlifyIdentity) {
+      window.netlifyIdentity.on('init', (user: any) => {
+        if (!user) {
+          window.netlifyIdentity.on('login', () => {
+            document.location.href = '/admin/';
+          });
+        }
+      });
+    }
+  }, []);
+
   // Simple routing based on current path
   const currentPath = window.location.pathname;
   
