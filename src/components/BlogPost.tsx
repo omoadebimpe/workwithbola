@@ -1,12 +1,25 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Calendar, Clock, User, ArrowLeft, Share2, BookOpen } from 'lucide-react';
 
 interface BlogPostProps {
   slug?: string;
 }
 
-// Sample blog post data - this will be replaced by Netlify CMS content
-const samplePost = {
+interface BlogPostData {
+  title: string;
+  content: string;
+  author: string;
+  date: string;
+  description?: string;
+  image?: string;
+  tags: string[];
+  category: string;
+  published: boolean;
+  slug: string;
+}
+
+// Sample post as fallback
+const samplePost: BlogPostData = {
   title: 'Why Your Website is Losing You Clients (And How to Fix It)',
   content: `
     <p>Your website is often the first impression potential clients have of your business. In today's digital world, a poorly designed or outdated website can cost you valuable opportunities before you even know they existed.</p>
@@ -51,13 +64,118 @@ const samplePost = {
   `,
   author: 'Bola Olaniyan',
   date: '2024-01-15',
-  readTime: '5 min read',
   category: 'Web Design',
   image: 'https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg?auto=compress&cs=tinysrgb&w=1200',
-  tags: ['Web Design', 'User Experience', 'Business Growth', 'Digital Marketing']
+  tags: ['Web Design', 'User Experience', 'Business Growth', 'Digital Marketing'],
+  published: true,
+  slug: 'why-your-website-is-losing-you-clients',
+  description: 'Learn the 5 critical mistakes that drive clients away and how to fix them'
 };
 
 const BlogPost: React.FC<BlogPostProps> = ({ slug }) => {
+  const [post, setPost] = useState<BlogPostData | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const loadPost = async () => {
+      if (!slug) {
+        // If no slug provided, show sample post
+        setPost(samplePost);
+        setLoading(false);
+        return;
+      }
+
+      try {
+        setLoading(true);
+        setError(null);
+
+        // Try to fetch the markdown file from the public/blog folder
+        const response = await fetch(`/blog/${slug}.md`);
+        
+        if (!response.ok) {
+          throw new Error('Post not found');
+        }
+
+        const markdownContent = await response.text();
+        
+        // Parse frontmatter and content
+        const post = parseMarkdownPost(markdownContent, slug);
+        setPost(post);
+      } catch (err) {
+        console.error('Error loading post:', err);
+        setError('Post not found');
+        // Fallback to sample post
+        setPost(samplePost);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadPost();
+  }, [slug]);
+
+  // Function to parse markdown frontmatter and content
+  const parseMarkdownPost = (markdown: string, slug: string): BlogPostData => {
+    const parts = markdown.split('---');
+    if (parts.length < 3) {
+      throw new Error('Invalid markdown format');
+    }
+
+    // Parse frontmatter (YAML)
+    const frontmatterText = parts[1];
+    const content = parts.slice(2).join('---').trim();
+
+    // Simple frontmatter parser (you might want to use a proper YAML parser)
+    const frontmatter: any = {};
+    frontmatterText.split('\n').forEach(line => {
+      const [key, ...valueParts] = line.split(':');
+      if (key && valueParts.length > 0) {
+        const value = valueParts.join(':').trim().replace(/^["']|["']$/g, '');
+        if (key.trim() === 'tags') {
+          // Parse tags array
+          frontmatter[key.trim()] = value.replace(/[\[\]]/g, '').split(',').map(tag => tag.trim().replace(/["']/g, ''));
+        } else {
+          frontmatter[key.trim()] = value;
+        }
+      }
+    });
+
+    // Convert markdown to HTML (basic conversion - you might want to use a proper markdown parser)
+    const htmlContent = convertMarkdownToHtml(content);
+
+    return {
+      title: frontmatter.title || 'Untitled',
+      content: htmlContent,
+      author: frontmatter.author || 'Bola Olaniyan',
+      date: frontmatter.date || new Date().toISOString(),
+      description: frontmatter.description || '',
+      image: frontmatter.image || '',
+      tags: frontmatter.tags || [],
+      category: frontmatter.category || 'Uncategorized',
+      published: frontmatter.published !== false,
+      slug: frontmatter.slug || slug
+    };
+  };
+
+  // Basic markdown to HTML converter (consider using a proper library like marked or remark)
+  const convertMarkdownToHtml = (markdown: string): string => {
+    return markdown
+      .replace(/^# (.*$)/gim, '<h1>$1</h1>')
+      .replace(/^## (.*$)/gim, '<h2>$1</h2>')
+      .replace(/^### (.*$)/gim, '<h3>$1</h3>')
+      .replace(/^\* (.*$)/gim, '<li>$1</li>')
+      .replace(/^\d+\. (.*$)/gim, '<li>$1</li>')
+      .replace(/\*\*(.*)\*\*/gim, '<strong>$1</strong>')
+      .replace(/\*(.*)\*/gim, '<em>$1</em>')
+      .replace(/\n\n/gim, '</p><p>')
+      .replace(/^(.*)$/gim, '<p>$1</p>')
+      .replace(/<p><h/gim, '<h')
+      .replace(/<\/h([1-6])><\/p>/gim, '</h$1>')
+      .replace(/<p><li>/gim, '<ul><li>')
+      .replace(/<\/li><\/p>/gim, '</li></ul>');
+  };
+
   const scrollToBlog = () => {
     window.location.href = '/blog';
   };
@@ -65,15 +183,62 @@ const BlogPost: React.FC<BlogPostProps> = ({ slug }) => {
   const sharePost = () => {
     if (navigator.share) {
       navigator.share({
-        title: samplePost.title,
+        title: post?.title || 'Blog Post',
         url: window.location.href,
       });
     } else {
-      // Fallback to copying URL to clipboard
       navigator.clipboard.writeText(window.location.href);
       alert('Link copied to clipboard!');
     }
   };
+
+  // Calculate read time
+  const calculateReadTime = (content: string): string => {
+    const wordsPerMinute = 200;
+    const words = content.replace(/<[^>]*>/g, '').split(/\s+/).length;
+    const minutes = Math.ceil(words / wordsPerMinute);
+    return `${minutes} min read`;
+  };
+
+  if (loading) {
+    return (
+      <div className="py-12 sm:py-16 lg:py-24">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="animate-pulse">
+            <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded mb-4"></div>
+            <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded mb-2"></div>
+            <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded mb-8"></div>
+            <div className="aspect-video bg-gray-200 dark:bg-gray-700 rounded-xl mb-8"></div>
+            <div className="space-y-4">
+              <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded"></div>
+              <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded"></div>
+              <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (error && !post) {
+    return (
+      <div className="py-12 sm:py-16 lg:py-24">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">Post Not Found</h1>
+          <p className="text-gray-600 dark:text-gray-400 mb-8">The blog post you're looking for doesn't exist.</p>
+          <button
+            onClick={scrollToBlog}
+            className="inline-flex items-center text-blue-600 dark:text-blue-400 font-medium hover:text-blue-700 dark:hover:text-blue-300 transition-colors duration-300"
+          >
+            <ArrowLeft className="w-4 h-4 mr-2" />
+            Back to Blog
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  if (!post) return null;
 
   return (
     <article className="py-12 sm:py-16 lg:py-24 relative">
@@ -94,23 +259,23 @@ const BlogPost: React.FC<BlogPostProps> = ({ slug }) => {
         <header className="mb-8 sm:mb-12">
           {/* Category */}
           <div className="inline-block bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-medium mb-4 sm:mb-6">
-            {samplePost.category}
+            {post.category}
           </div>
 
           {/* Title */}
           <h1 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 dark:text-white mb-4 sm:mb-6 leading-tight">
-            {samplePost.title}
+            {post.title}
           </h1>
 
-          {/* Meta Info - Mobile First Layout */}
+          {/* Meta Info */}
           <div className="space-y-3 sm:space-y-0 sm:flex sm:flex-wrap sm:items-center sm:gap-4 lg:gap-6 text-gray-600 dark:text-gray-400 mb-6 sm:mb-8">
             <div className="flex items-center whitespace-nowrap">
               <User className="w-4 h-4 mr-2 flex-shrink-0" />
-              <span className="font-medium text-sm sm:text-base">{samplePost.author}</span>
+              <span className="font-medium text-sm sm:text-base">{post.author}</span>
             </div>
             <div className="flex items-center whitespace-nowrap">
               <Calendar className="w-4 h-4 mr-2 flex-shrink-0" />
-              <span className="text-sm sm:text-base">{new Date(samplePost.date).toLocaleDateString('en-US', { 
+              <span className="text-sm sm:text-base">{new Date(post.date).toLocaleDateString('en-US', { 
                 year: 'numeric', 
                 month: 'long', 
                 day: 'numeric' 
@@ -118,13 +283,20 @@ const BlogPost: React.FC<BlogPostProps> = ({ slug }) => {
             </div>
             <div className="flex items-center whitespace-nowrap">
               <Clock className="w-4 h-4 mr-2 flex-shrink-0" />
-              <span className="text-sm sm:text-base">{samplePost.readTime}</span>
+              <span className="text-sm sm:text-base">{calculateReadTime(post.content)}</span>
             </div>
             <div className="flex items-center whitespace-nowrap">
               <BookOpen className="w-4 h-4 mr-2 flex-shrink-0" />
               <span className="text-sm sm:text-base">Business Tips</span>
             </div>
           </div>
+
+          {/* Description */}
+          {post.description && (
+            <p className="text-lg text-gray-600 dark:text-gray-400 mb-6 sm:mb-8">
+              {post.description}
+            </p>
+          )}
 
           {/* Share Button */}
           <button
@@ -137,36 +309,40 @@ const BlogPost: React.FC<BlogPostProps> = ({ slug }) => {
         </header>
 
         {/* Featured Image */}
-        <div className="aspect-video bg-gray-100 dark:bg-gray-700 rounded-xl sm:rounded-2xl overflow-hidden mb-8 sm:mb-12">
-          <img
-            src={samplePost.image}
-            alt={samplePost.title}
-            className="w-full h-full object-cover"
-          />
-        </div>
+        {post.image && (
+          <div className="aspect-video bg-gray-100 dark:bg-gray-700 rounded-xl sm:rounded-2xl overflow-hidden mb-8 sm:mb-12">
+            <img
+              src={post.image}
+              alt={post.title}
+              className="w-full h-full object-cover"
+            />
+          </div>
+        )}
 
         {/* Article Content */}
         <div className="prose prose-sm sm:prose-base lg:prose-lg dark:prose-invert max-w-none">
           <div 
             className="blog-content"
-            dangerouslySetInnerHTML={{ __html: samplePost.content }}
+            dangerouslySetInnerHTML={{ __html: post.content }}
           />
         </div>
 
         {/* Tags */}
-        <div className="mt-8 sm:mt-12 pt-6 sm:pt-8 border-t border-gray-200 dark:border-gray-700">
-          <h3 className="text-base sm:text-lg font-semibold text-gray-900 dark:text-white mb-3 sm:mb-4">Tags</h3>
-          <div className="flex flex-wrap gap-2 sm:gap-3">
-            {samplePost.tags.map((tag, index) => (
-              <span
-                key={index}
-                className="bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 px-2 py-1 sm:px-3 sm:py-1 rounded-full text-xs sm:text-sm font-medium hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-300 cursor-pointer"
-              >
-                #{tag.replace(' ', '').toLowerCase()}
-              </span>
-            ))}
+        {post.tags && post.tags.length > 0 && (
+          <div className="mt-8 sm:mt-12 pt-6 sm:pt-8 border-t border-gray-200 dark:border-gray-700">
+            <h3 className="text-base sm:text-lg font-semibold text-gray-900 dark:text-white mb-3 sm:mb-4">Tags</h3>
+            <div className="flex flex-wrap gap-2 sm:gap-3">
+              {post.tags.map((tag, index) => (
+                <span
+                  key={index}
+                  className="bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 px-2 py-1 sm:px-3 sm:py-1 rounded-full text-xs sm:text-sm font-medium hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors duration-300 cursor-pointer"
+                >
+                  #{tag.replace(/\s+/g, '').toLowerCase()}
+                </span>
+              ))}
+            </div>
           </div>
-        </div>
+        )}
 
         {/* Author Bio */}
         <div className="mt-8 sm:mt-12 p-4 sm:p-6 lg:p-8 bg-gray-50 dark:bg-gray-800/50 rounded-xl sm:rounded-2xl border border-gray-200 dark:border-gray-700">
@@ -176,7 +352,7 @@ const BlogPost: React.FC<BlogPostProps> = ({ slug }) => {
             </div>
             <div className="text-center sm:text-left">
               <h4 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white mb-2">
-                {samplePost.author}
+                {post.author}
               </h4>
               <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300 leading-relaxed mb-3 sm:mb-4">
                 Digital Solutions Consultant helping local businesses transform their online presence. 
