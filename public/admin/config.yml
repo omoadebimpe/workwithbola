@@ -19,7 +19,7 @@ collections:
       - {label: "Publish Date", name: "date", widget: "datetime"}
       - {label: "Featured Image", name: "image", widget: "image", required: false}
       - {label: "Excerpt", name: "excerpt", widget: "text"}
-      - {label: "Category", name: "category", widget: "select", options: ["Web Design", "Branding", "Digital Tools", "Business Tips"]}
+      - {label: "Category", name: "category", widget: "select", options: ["Web Design", "Branding", "Digital Tools", "Business Tips", "Random Thoughts"]}
       - {label: "Tags", name: "tags", widget: "list", default: []}
       - {label: "Author", name: "author", widget: "string", default: "Bola Olaniyan"}
       - {label: "Read Time", name: "readTime", widget: "string", default: "5 min read"}
