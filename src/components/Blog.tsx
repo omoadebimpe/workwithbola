@@ -55,7 +55,7 @@ const samplePosts: BlogPost[] = [
 ];
 
 const Blog = () => {
-  const categories = ['All', 'Web Design', 'Branding', 'Digital Tools', 'Business Tips'];
+  const categories = ['All', 'Web Design', 'Branding', 'Digital Tools', 'Business Tips', 'Random Thoughts'];
   const [selectedCategory, setSelectedCategory] = React.useState('All');
 
   const filteredPosts = selectedCategory === 'All' 
