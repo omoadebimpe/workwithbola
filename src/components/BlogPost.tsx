@@ -90,7 +90,7 @@ const BlogPost: React.FC<BlogPostProps> = ({ slug }) => {
         setLoading(true);
         setError(null);
 
-        // Try to fetch the markdown file from the public/blog folder
+        // Try to fetch the markdown file from the content/blog folder
         const response = await fetch(`/blog/${slug}.md`);
         
         if (!response.ok) {
