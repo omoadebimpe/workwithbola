@@ -10,6 +10,17 @@
   <!-- Include the script that builds the page and powers Netlify CMS -->
   <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
   
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+<script type="module">
+  const { files } = await (await fetch('/_content/blog.json')).json(); // Netlify serves this
+  const container = document.getElementById('post-list');
+  for (const file of files) {
+    const md = await (await fetch(file)).text();
+    const html = marked.parse(md);
+    container.insertAdjacentHTML('beforeend', `<article>${html}</article>`);
+  }
+</script>
+
   <script>
     if (window.netlifyIdentity) {
       window.netlifyIdentity.on("init", user => {
