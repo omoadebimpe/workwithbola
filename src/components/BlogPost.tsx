@@ -90,17 +90,19 @@ const BlogPost: React.FC<BlogPostProps> = ({ slug }) => {
         setLoading(true);
         setError(null);
 
-        // Try to fetch the markdown file from the content/blog folder
-        const response = await fetch(`/blog/${slug}.md`);
+        // Try Netlify function first
+        const response = await fetch(`/.netlify/functions/get-post?slug=${slug}`);
         
         if (!response.ok) {
           throw new Error('Post not found');
         }
 
-        const markdownContent = await response.text();
+        const post = await response.json();
         
-        // Parse frontmatter and content
-        const post = parseMarkdownPost(markdownContent, slug);
+        // Convert markdown content to HTML
+        const htmlContent = convertMarkdownToHtml(post.content);
+        post.content = htmlContent;
+        
         setPost(post);
       } catch (err) {
         console.error('Error loading post:', err);
