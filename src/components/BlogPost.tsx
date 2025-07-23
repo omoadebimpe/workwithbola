@@ -250,6 +250,10 @@ const BlogPost: React.FC<BlogPostProps> = ({ slug }) => {
         <div className="absolute bottom-20 right-10 w-96 h-96 bg-purple-400/10 dark:bg-purple-400/5 rounded-full blur-3xl animate-pulse delay-1000"></div>
         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-r from-emerald-400/5 to-blue-400/5 dark:from-emerald-400/3 dark:to-blue-400/3 rounded-full blur-3xl"></div>
       </div>
+        <div className="absolute top-20 left-10 w-72 h-72 bg-blue-400/10 dark:bg-blue-400/5 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-20 right-10 w-96 h-96 bg-purple-400/10 dark:bg-purple-400/5 rounded-full blur-3xl animate-pulse delay-1000"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-r from-emerald-400/5 to-blue-400/5 dark:from-emerald-400/3 dark:to-blue-400/3 rounded-full blur-3xl"></div>
+      </div>
       
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Back Button */}
@@ -260,6 +264,8 @@ const BlogPost: React.FC<BlogPostProps> = ({ slug }) => {
           >
             <ArrowLeft className="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform duration-300" />
             <span className="text-sm sm:text-base">Back to Insights</span>
+          </button>
+        </div>
           </button>
         </div>
 
@@ -331,11 +337,27 @@ const BlogPost: React.FC<BlogPostProps> = ({ slug }) => {
               </div>
             </div>
           </div>
+            </button>
+            
+            <div className="flex items-center space-x-6 text-gray-500 dark:text-gray-400">
+              <div className="flex items-center">
+                <Eye className="w-4 h-4 mr-1" />
+                <span className="text-sm font-medium">2.1k</span>
+              </div>
+              <div className="flex items-center">
+                <Heart className="w-4 h-4 mr-1" />
+                <span className="text-sm font-medium">89</span>
+              </div>
+              <div className="flex items-center">
+                <MessageCircle className="w-4 h-4 mr-1" />
+                <span className="text-sm font-medium">12</span>
+              </div>
+            </div>
+          </div>
         </header>
 
         {/* Featured Image */}
         {post.image && (
-          <div className="aspect-video bg-gray-100 dark:bg-gray-700 rounded-xl sm:rounded-2xl overflow-hidden mb-8 sm:mb-12">
             <img
               src={post.image}
               alt={post.title}
